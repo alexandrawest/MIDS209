@@ -12,7 +12,7 @@ var svg = d3.select("#my_dataviz")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 //Read the data
-d3.csv("/steps.csv",
+d3.csv("https://raw.githubusercontent.com/alexandrawest/MIDS209/master/Assignment%201%20-%20Alex%20West/steps.csv",
   // When reading the csv, I must format variables:
   function(d){
     return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
@@ -28,7 +28,7 @@ d3.csv("/steps.csv",
       .call(d3.axisBottom(x));
     // Add Y axis
     var y = d3.scaleLinear()
-      .domain( [8000, 9200])
+      .domain( [0, 20000])
       .range([ height, 0 ]);
     svg.append("g")
       .call(d3.axisLeft(y));
