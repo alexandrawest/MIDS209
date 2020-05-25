@@ -1,31 +1,33 @@
-var width = 500,
-      height = 500,
-      svg = d3.select("#chart")
-.append("svg")
-.attr("width", width)
-.attr("height", height);
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 1060 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
-var margin = ({top: 30, right: 30, bottom: 30, left: 40}),
-      iwidth = width - margin.left - margin.right,
-      iheight = height - margin.top - margin.bottom;
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var gDrawing = svg.append("g")
-  .attr("transform", `translate(${margin.left}, ${margin.top})`);
+// scale X  --> it is a date format
+var x = d3.scaleTime()
+    .range([ 0, width ]);
 
-var x = d3.scaleLinear()
-  .range([0, iwidth]);
+// scale Y axis
 var y = d3.scaleLinear()
-  .range([iheight, 0]);
+          .range([ height, 0 ]);
 
 
 function update(myData) {
-  // TODO Update scale domains based on your data variables
-  x.domain([0, 1]);
-  y.domain([0, 1]);
+  // scale domains based on variables
+  x.domain(d3.extent(myData, function(d) { return d.date; }))
+  y.domain([0, 16000]);
 
-
-  gDrawing.append("g")
-    .attr("transform", `translate(0,${iheight})`)
+//append x axis
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x))
     .append("text")
     .style("fill", "black")
@@ -33,7 +35,8 @@ function update(myData) {
     .text("xAxis")
     .attr("transform", `translate(${iwidth}, ${-20})`);
 
-  gDrawing.append("g")
+//append y axis
+  svg.append("g")
     .call(d3.axisLeft(y))
     .append("text")
     .style("fill", "black")
@@ -42,24 +45,32 @@ function update(myData) {
     .attr("transform", `translate(${50}, 0)`);
 
 
-  var marks = gDrawing.selectAll(".mark")
-    .data(myData);
-
-  // Update
-  marks
-    //TODO change the attribs/style of your updating mark
-
-  // Newly created elements
-  marks.enter()
-    .append("circle")
-    .attr("class", "mark") // TODO change for the mark you want to use e.g. rect, path, etc
-    //TODO change the attribs/style of your updating mark
-
-  // Elements to remove
-  marks.exit()
-    .remove();
+// Add the line
+  svg.append("path")
+      .datum(myData)
+      .attr("fill", "none")
+      .attr("stroke", "#69b3a2")
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.date) })
+        .y(function(d) { return y(d.value) })
+      );
+// Add the points
+  svg
+      .append("g")
+      .selectAll("dot")
+      .data(myData)
+      .enter()
+      .append("circle")
+      .attr("cx", function(d) { return x(d.date) } )
+      .attr("cy", function(d) { return y(d.value) } )
+      .attr("r", 5)
+      .attr("fill", "#69b3a2");
 
 }
 
-var myData = []; // You can enter your data here or load it from a JSON or CSV file
+var myData = d3.csv("https://raw.githubusercontent.com/alexandrawest/MIDS209/master/Assignment%201%20-%20Alex%20West/steps1.csv",
+          function(d){return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
+        },
+
 update(myData);
