@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Assignment 1 Part 1 - Alex West, Steps in 2020</title>
+    <link rel="stylesheet" href="hw1.css" />
+  </head>
+
+  <body>
+
+    <div class="chart">
+      <h1>Steps taken in 2020</h1>
+      <div class="description">Did I take more steps per day before or after the shelter-in-place order?</div>
+      <div id="chart"></div>
+      <div class="chart-footer">By Alexandra West
+        <br>
+        <strong>Code source material</strong>: <a href="https://www.d3-graph-gallery.com/graph/connectedscatter_basic.html">My code source</a>
+        <br>
+        <strong>Data source</strong>: My iPhone
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+      It was my impression that I was walking a lot more in quarantine, especially with walking my dog three times per day.
+      <br>
+      However, at least in this graph there isn't a discernable difference until I delve into the summary statistics,
+      at least looking solely at data from January-May. There are clearly complete outliers where I've taken a big hike
+      (or walked all over London on March 2 - pre-quarantine). It's not a perfect data collection device since I have to
+      remember to bring it with me (not a wearable device).
+
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <h2>Problem Abstraction</h2>
+    <div>Use Tamara Munzner's framework to Abstract your problem (what, why, how) </div>
+
+    <br>
+    <table>
+      <thead>
+          <tr>
+              <th colspan="2">Problem Abstraction</th>
+            </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>What</td>
+              <td>We have a csv (table) of two columns, date (Year-month-day) and steps taken (numerical).
+                This data comes from a data export from the Health app on my iPhone.</td>
+            </tr>
+            <tr>
+              <td>Why</td>
+              <td>This is a comparison over time of steps taken, the visual task is to discern the differences in scatterplot
+                values over time.</td>
+            </tr>
+            <tr>
+              <td>How</td>
+              <td>Marks: point and line, and channels: x and y axes, color only to highlight the line and no other purpose</td>
+            </tr>
+              <tr>
+                <td>insight 1</td>
+                <td>There's a clear trend of not moving around much on Saturdays, or intentionally leaving my phone at home on the weekends.</td>
+              </tr>
+              <tr>
+                <td>insight 2</td>
+                <td>Looking purely at averages, my average steps per day in January and February were in the high 3,000s, and in March, April, and May,
+                average steps per day are between 4,500 and 5,000. So there is a clear difference, just not when we visualize it by day.</td>
+              </tr>
+      </tbody>
+  </table>
+
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="hw1-test.js"></script>
+
+  </body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <div id="my_dataviz"></div>
+    <script src="hw1-test.js"></script>
+
+  </body>
+</html> -->
