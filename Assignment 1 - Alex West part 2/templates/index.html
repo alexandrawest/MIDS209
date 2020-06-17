@@ -3,21 +3,30 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Assignment 1 Part 1 - Alex West, Steps in 2020</title>
-    <link rel="stylesheet" href="hw1.css" />
+    <title>Assignment 1 Part 2 - Alex West, Steps in 2020</title>
+    <link rel="stylesheet" href="static/hw1.css" />
   </head>
 
   <body>
 
     <div class="chart">
-      <h1>Steps taken in 2020</h1>
-      <div class="description">Did I take more steps per day before or after the shelter-in-place order?</div>
-      <div id="chart"></div>
+      <h1>I'm Walking More in Quarantine - Barely</h1>
+      <div class="description">Did I take more steps per day before or after the shelter-in-place order? First, looking at steps per day</div>
+      <div id="chart1"></div>
+      </div>
+    </div>
+
+    <div class="chart">
+      <h1>Steps Per Week and Month</h1>
+      <div class="description">It may be easier to see in aggregate.</div>
+      <button onclick="update(data1)">Steps per week</button>
+      <button onclick="update(data2)">Steps per month</button>
+      <div id="chart2"></div>
       <div class="chart-footer">By Alexandra West
         <br>
         <strong>Code source material</strong>: <a href="https://www.d3-graph-gallery.com/graph/connectedscatter_basic.html">My code source</a>
         <br>
-        <strong>Data source</strong>: My iPhone
+        <strong>Data source</strong>: My iPhone, using the Health app downloaded into a csv
       </div>
     </div>
 
@@ -77,7 +86,8 @@
   </table>
 
   <script src="https://d3js.org/d3.v4.min.js"></script>
-  <script src="hw1-test.js"></script>
+  <script src="static/hw1-part2-ch1.js"></script>
+  <script src="static/hw1-part2-ch2.js"></script>
 
   </body>
 </html>
